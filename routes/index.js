@@ -16,6 +16,7 @@ router.get('/getGoogleResult', (req, res, next) => {
             return;
         }
         console.log(results);
+        res.json(results)
         // res.render('index', { data: JSON.stringify(results) })
 
     });
