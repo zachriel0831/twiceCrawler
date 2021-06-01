@@ -3,7 +3,6 @@ let paginationControl = () => {
         dataSource: '/getImageList',
         locator: 'items',
         totalNumberLocator: function (response) {
-            // you can return totalNumber by analyzing response content
             return Math.floor(Math.random() * (1000 - 100)) + 100;
         },
         pageSize: 20,
