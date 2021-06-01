@@ -6,7 +6,7 @@ const imageRoute = require('./routes/index');
 
 require('dotenv').config({ path: './.env' });
 
-mongoose.connect(`mongodb+srv://zack:zack0831@tradingcarddb.40fgm.gcp.mongodb.net/twice_crawler?retryWrites=true&w=majority`,{useNewUrlParser: true}).then(() => {
+mongoose.connect(`mongodb+srv://twice_crawler?retryWrites=true&w=majority`,{useNewUrlParser: true}).then(() => {
     console.log('Connection to the Atlas Cluster is successful!')
   }).catch( (err) => console.error(err));
 
