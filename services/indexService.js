@@ -13,7 +13,7 @@ const google = new Scraper({
         headless: false,
     },
 });
-
+  
 module.exports = {
     getGoogleResult: async (param, callback) => {
         try {
@@ -21,10 +21,10 @@ module.exports = {
 
             await imageItem.deleteMany({ category: 'momo' });
             const crawlerConfig = {
-                // 'twice': ['韓團twice', '트와이스', 'トゥワイス'],
-                // 'nayeon': ['twice Nayeon', 'twice 娜璉', 'twice 임나연', 'twice ナヨン'],
+                'twice': ['韓團twice', '트와이스', 'トゥワイス'],
+                'nayeon': ['twice Nayeon', 'twice 娜璉', 'twice 임나연', 'twice ナヨン'],
                 // 'jeongyeon': ['twice Jeongyeon', 'twice 定延', 'twice 정연', 'twice ジョンヨン'],
-                'momo': ['twice momo','twice 平井桃', 'twice 모모', 'twice モモ'],
+                // 'momo': ['twice momo','twice 平井桃', 'twice 모모', 'twice モモ'],
                 // 'sana': ['twice Sana', 'twice サナ', 'twice 湊崎紗夏', 'twice 사나'],
                 // 'jihyo': ['twice Jihyo', 'twice 志效', 'twice 지효', 'twice ジヒョ'],
                 // 'mina': ['twice Mina', 'twice ミナ', 'twice 名井南	', 'twice 미나', 'twice みょうい みな'],
@@ -35,7 +35,6 @@ module.exports = {
 
             await _.each(crawlerConfig, async (v, k) => {
                 let category = k;
-
                 let keyWords = v;
 
                 await _.each(keyWords, async (v, k) => {
@@ -64,18 +63,17 @@ module.exports = {
 
                     })
                     console.log('images boxed');
-
                     console.log('images inserting ' + imagelists.length);
+                    if(imagelists.length !== 0) {
+                        await imageItem.insertMany(imagelists, (err) => {
 
-                    await imageItem.insertMany(imagelists, (err) => {
-
-                        console.log(err);
-
-                    });
+                            console.log(err);
+    
+                        });
+                    }
 
                     console.log("searching finished")
                 })
-
             })
 
             callback('', {'msg':'done'});
@@ -122,7 +120,7 @@ module.exports = {
             console.error(
                 `ERROR: An error occurred while trying to getImageList : ${e}`
             );
-            callback('error', 0);
+            callback('error', 500);
         }
     },
     sleep: (ms) => {
